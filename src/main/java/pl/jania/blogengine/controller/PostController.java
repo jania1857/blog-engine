@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jania.blogengine.dto.PostDto;
+import pl.jania.blogengine.service.PostService;
 
 import java.util.List;
 
@@ -12,9 +13,15 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostController {
 
+    private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping
     public ResponseEntity<List<PostDto>> getPosts() {
-        return ResponseEntity.ok(List.of());
+        return ResponseEntity.ok(postService.findAll());
     }
 
 }
