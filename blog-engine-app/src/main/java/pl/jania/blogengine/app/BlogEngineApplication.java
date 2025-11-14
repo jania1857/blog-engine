@@ -1,4 +1,4 @@
-package pl.jania.blogengine;
+package pl.jania.blogengine.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

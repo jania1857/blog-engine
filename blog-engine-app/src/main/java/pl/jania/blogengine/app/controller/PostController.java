@@ -1,11 +1,11 @@
-package pl.jania.blogengine.controller;
+package pl.jania.blogengine.app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.jania.blogengine.dto.PostDto;
-import pl.jania.blogengine.service.PostService;
+import pl.jania.blogengine.api.dto.PostDto;
+import pl.jania.blogengine.api.service.PostService;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package pl.jania.blogengine.service;
+package pl.jania.blogengine.api.service;
 
-import pl.jania.blogengine.dto.PostDto;
+import pl.jania.blogengine.api.dto.PostDto;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package pl.jania.blogengine;
+package pl.jania.blogengine.app.controller;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.jania.blogengine.dto.PostDto;
-import pl.jania.blogengine.service.PostService;
+import pl.jania.blogengine.api.dto.PostDto;
+import pl.jania.blogengine.api.service.PostService;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
-class PostApiTest {
+@WebMvcTest(PostController.class)
+class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,17 +28,19 @@ class PostApiTest {
     private PostService postService;
 
     @TestConfiguration
-    static class ControllerTestConfig {
-        @Bean PostService postService() {
+    static class PostControllerTestConfiguration {
+        @Bean
+        public PostService postService() {
             return Mockito.mock(PostService.class);
         }
     }
 
-
     @Test
     void shouldReturnEmptyListOfPostsWhenNoPostsExist() throws Exception {
+        // Given
         when(postService.findAll()).thenReturn(List.of());
 
+        // When/Then
         mockMvc.perform(get("/api/posts"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -47,6 +49,7 @@ class PostApiTest {
 
     @Test
     void shouldReturnOnePostWhenOnePostExists() throws Exception {
+        // Given
         var post = new PostDto("My First Post");
         var expectedResponseJson = """
                 [
@@ -61,5 +64,4 @@ class PostApiTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(expectedResponseJson));
     }
-
 }

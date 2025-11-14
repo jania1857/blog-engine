@@ -1,4 +1,4 @@
-package pl.jania.blogengine.dto;
+package pl.jania.blogengine.api.dto;
 
 public record PostDto(
         String title
